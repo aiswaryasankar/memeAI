@@ -1,0 +1,54 @@
+{
+    "classes": [
+        {
+            "class": "Meme",
+            "description": "Database of memes with their descriptions",
+            "vectorizer": "text2vec-openai",
+            "moduleConfig": {
+                "text2vec-openai": {
+                    "vectorizeClassName": false,
+                    "textFields": [
+                        "description"
+                    ]
+                }
+            },
+            "properties": [
+                {
+                    "dataType": ["text"],
+                    "description": "Meme Description",
+                    "name": "description"
+                },
+                {
+                    "dataType": ["text"],
+                    "description": "Filename of meme",
+                    "name": "filename",
+                    "moduleConfig": {
+                        "text2vec-openai": {
+                            "skip": true
+                        }
+                    }
+                },
+                {
+                    "dataType": ["text"],
+                    "description": "Name of meme",
+                    "name": "name",
+                    "moduleConfig": {
+                        "text2vec-openai": {
+                            "skip": true
+                        }
+                    }
+                },
+                {
+                    "dataType": ["blob"],
+                    "description": "Image data",
+                    "name": "image",
+                    "moduleConfig": {
+                        "text2vec-openai": {
+                            "skip": true
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
