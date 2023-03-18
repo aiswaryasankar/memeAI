@@ -8,6 +8,8 @@ import openai
 import weaviate
 import os
 from idl import *
+from PIL import Image, ImageDraw, ImageFont
+
 
 
 handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
@@ -86,15 +88,39 @@ def generate_text_for_meme(generateTextForMemeRequest):
 
 def generate_meme_image(generateMemeImageRequest):
   """
-    Demo function for testing purposes
+    Add the generated meme text to the image response
+      MemeImage: str
+      MemeText: str
   """
 
+  try:
+    # Load the image
+    curPath = os.getcwd()
+    image = Image.open(curPath + '/memeGeneration/query-result-image-0.png')
 
+    # Create a drawing context and set the font
+    draw = ImageDraw.Draw(image)
+    font = ImageFont.truetype("Andale Mono.ttf", size=32)
 
+    # Define the text to draw and its position
+    text = generateMemeImageRequest.MemeText
+    position = (50, 50)
 
+    # Draw the text on the image
+    draw.text(position, text, fill=(255, 255, 255), font=font)
 
+    # Save the modified image to disk
+    path = curPath + '/memeGeneration/meme_processed.png'
+    image.save(curPath + '/memeGeneration/meme_processed.png')
 
+    return GenerateMemeImageResponse(
+      ProcessedMeme=path,
+      Error=None,
+    )
 
-
-
+  except Exception as e:
+    return GenerateMemeImageResponse(
+      ProcessedMeme="",
+      Error=str(e),
+    )
 

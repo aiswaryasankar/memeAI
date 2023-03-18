@@ -64,7 +64,7 @@ def match_text_to_meme(matchTextToMemeRequest):
       prompt=emotionalDescription,
       temperature=0.7,
       max_tokens=500,
-      n=1,
+      n=10,
       stop=None,
       frequency_penalty=0,
       best_of=1,
@@ -76,7 +76,7 @@ def match_text_to_meme(matchTextToMemeRequest):
     # Use that text to match with memes
     source_text = { "concepts": memeQueryText.choices[0].text }
 
-    weaviate_results = CLIENT.query.get("Meme", ["description", 'image']).with_near_text(source_text).with_limit(2).do()
+    weaviate_results = CLIENT.query.get("Meme", ["description", 'image']).with_near_text(source_text).with_limit(10).do()
 
     logger.info("Weaviate results: " + str(weaviate_results))
 
