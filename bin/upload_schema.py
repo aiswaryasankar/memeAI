@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Create schema and add to Weaviate Instance
+Create schema and add to Weaviate instance
 """
 
 import os

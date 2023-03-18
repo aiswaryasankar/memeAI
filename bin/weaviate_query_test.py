@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
 """
-Test the Weaviate query `Happy`
+Test if Weaviate instance contains objects by querying for 
+meme descriptions similar to `Happy`
 """
 
 import os
