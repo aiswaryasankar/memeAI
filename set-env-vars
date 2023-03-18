@@ -1,5 +1,5 @@
 #!/bin/bash
 
-export WEAVIATE_URL="https://ai-meme-generation-9xwtq8vx.weaviate.network"
-export ACCESS_TOKEN="8Jf5YQuFICsJPHaveRDwxB8h6LaIEcqqbLyq"
-export OPENAI_API_KEY="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"
+export WEAVIATE_URL=
+export ACCESS_TOKEN=
+export OPENAI_API_KEY=

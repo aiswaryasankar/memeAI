@@ -6,10 +6,17 @@ meme descriptions similar to `Happy`
 """
 
 import os
-
+import logging
+from logtail import LogtailHandler
 import base64
 
 import weaviate
+handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
+logger = logging.getLogger(__name__)
+logger.handlers = []
+logger.addHandler(handler)
+logger.setLevel(logging.INFO)
+
 
 WEAVIATE_URL = os.getenv('WEAVIATE_URL')
 CLIENT_CONFIG = None
@@ -44,23 +51,23 @@ def weaviate_text_search(text):
 
     weaviate_results = CLIENT.query.get("Meme", ["description", 'image']).with_near_text(source_text).with_limit(2).do()
 
-    print(weaviate_results)
+    logger.info(weaviate_results)
     return weaviate_results["data"]["Get"]["Meme"]
 
-print(f"Connecting to a weaviate instance at the following URL: {WEAVIATE_URL}")
+logger.info(f"Connecting to a weaviate instance at the following URL: {WEAVIATE_URL}")
 
 query_results = weaviate_text_search('Sad')
 
-print(query_results)
+logger.info(query_results)
 
 for i, res in enumerate(query_results):
     description = res['description']
-    print(f"Description: {description}")
+    logger.info(f"Description: {description}")
     decoded_img = base64.b64decode(res['image'])
     with open(f'query-result-image-{i}.png', 'wb') as f:
         f.write(decoded_img)
 
-print("If you see descriptions and their corresponding images has been saved successfully, " \
+logger.info("If you see descriptions and their corresponding images has been saved successfully, " \
       "you can succesfully query the weaviate instance!")
 
 
