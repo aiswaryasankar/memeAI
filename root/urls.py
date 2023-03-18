@@ -15,7 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from memeGeneration import views as memeGenerationView
+from memeMatching import views as memeMatchingView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # MemeMatching endpoints
+    path('matchTextToMeme/', memeMatchingView.match_text_to_meme_view),
+    path('indexMemes/', memeMatchingView.match_text_to_meme_view),
+
+    # MemeGeneration endpoints
+    path('generateTextForMeme/', memeGenerationView.generate_text_for_meme_view),
+    path('generateMeme/', memeGenerationView.generate_meme_image_view),
+
 ]
