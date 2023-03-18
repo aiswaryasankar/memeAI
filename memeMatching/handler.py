@@ -56,9 +56,8 @@ def match_text_to_meme(matchTextToMemeRequest):
     Generate meme text for a given input text
   """
 
-  # Use GPT to generate the emotional description of the text
   try:
-    emotionalDescription = "Describe the emotional value of this text " + str(matchTextToMemeRequest.InputText)
+    emotionalDescription = "Describe the emotional value of this text " + str(generateTextForMemeRequest.InputText)
 
     memeQueryText = openai.Completion.create(
       engine="text-davinci-003",
@@ -92,7 +91,6 @@ def match_text_to_meme(matchTextToMemeRequest):
       Memes=[],
       Error=str(e),
     )
-
 
 
 
