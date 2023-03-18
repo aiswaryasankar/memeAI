@@ -57,7 +57,7 @@ def match_text_to_meme(matchTextToMemeRequest):
   """
 
   try:
-    emotionalDescription = "Describe the emotional value of this text " + str(generateTextForMemeRequest.InputText)
+    emotionalDescription = "Describe the emotional value of this text " + str(matchTextToMemeRequest.InputText)
 
     memeQueryText = openai.Completion.create(
       engine="text-davinci-003",
