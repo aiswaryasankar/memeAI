@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Test if Weaviate instance contains objects by querying for 
+Test if Weaviate instance contains objects by querying for
 meme descriptions similar to `Happy`
 """
 
@@ -32,23 +32,27 @@ OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY is required for uploading objects to Weaviate")
 
-CLIENT = weaviate.Client(WEAVIATE_URL, 
+CLIENT = weaviate.Client(WEAVIATE_URL,
                          auth_client_secret=CLIENT_CONFIG,
                          additional_headers={"X-OpenAI-Api-Key": OPENAI_API_KEY})
 
 def weaviate_text_search(text):
     """
-    This function uses the nearText operator in Weaviate 
+    This function uses the nearText operator in Weaviate
     """
     source_text = { "concepts": text }
 
     weaviate_results = CLIENT.query.get("Meme", ["description", 'image']).with_near_text(source_text).with_limit(2).do()
 
+    print(weaviate_results)
     return weaviate_results["data"]["Get"]["Meme"]
 
 print(f"Connecting to a weaviate instance at the following URL: {WEAVIATE_URL}")
 
-query_results = weaviate_text_search('Happy')
+query_results = weaviate_text_search('Sad')
+
+print(query_results)
+
 for i, res in enumerate(query_results):
     description = res['description']
     print(f"Description: {description}")
@@ -58,3 +62,7 @@ for i, res in enumerate(query_results):
 
 print("If you see descriptions and their corresponding images has been saved successfully, " \
       "you can succesfully query the weaviate instance!")
+
+
+
+
