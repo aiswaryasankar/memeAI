@@ -44,6 +44,12 @@ CLIENT = weaviate.Client(WEAVIATE_URL,
                          auth_client_secret=CLIENT_CONFIG,
                          additional_headers={"X-OpenAI-Api-Key": OPENAI_API_KEY})
 
+CLIENT.batch.configure(
+    batch_size=10,
+    dynamic=True,
+    timeout_retries=3,
+    callback=None
+    )
 
 def hello_world(helloWorldRequest):
   """
