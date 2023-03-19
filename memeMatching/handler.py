@@ -9,6 +9,8 @@ import weaviate
 import os
 from idl import *
 
+import requests
+import base64
 
 handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
 logger = logging.getLogger(__name__)
@@ -98,10 +100,35 @@ def index_memes_weaviate(indexMemesWeaviateRequest):
   """
     Index memes in weaviate
   """
-  pass
 
+  image_desc_pairs = \
+    zip(indexMemesWeaviateRequest.MemeImageLink,
+        indexMemesWeaviateRequest.Description)
 
+  for url, description in image_desc_pairs:
+    response = requests.get(url, allow_redirects=True)
+    b64_encoded_image = base64.b64encode(response.content).decode('utf-8')
 
+    data_object = {
+      'filename': url,
+      'filepath': url,
+      'description': description,
+      'image': b64_encoded_image
+      }
 
+    logger.info(f"Uploading meme found at {url} " \
+                f"with the following description: {description}")
 
+    # Write image data to file to check if images are encoded correctly.
+    # with open(f'image-uploaded-to-weaviate-{i}.png', 'wb') as f:
+    #     f.write(base64.b64decode(b64_encoded_image))
 
+    try:
+      CLIENT.batch.add_data_object(data_object, "Meme")
+      logger.info('Successfully added Meme object to batch!')
+    except Exception as e:
+       return IndexMemesWeaviateResponse(Error=str(e))
+
+  logger.info('Sending Meme objects to Weaviate')
+  CLIENT.batch.flush()
+  return IndexMemesWeaviateResponse(Error=None)
