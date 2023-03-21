@@ -51,7 +51,14 @@ This script should print out the schema on Weaviate upon successfully connecting
 
 ### Test Querying
 If you would like to test whether you can query the Weaviate instance, you can run `bin/weaviate_query_test.py`. 
-If the script returns two descriptions and saves two image files, you are good to go.
+
+The script should return two descriptions and save two image files:
+1. "A frustrated person who is very disappointed at the outcome" -  `query-results-image-0.png`
+2. "A sad person receiving some comfort" - `query-results-image-1.png`
+
+You can double check the contents of the images by checking their "expected" counterpart:
+1. `query-results-image-0.png` should be `expected-query-result-image-0.png`
+2. `query-results-image-1.png` should be `expected-query-result-image-1.png`
 
 If you run into any issues here, please first check if you can connect to the Weaviate instance. 
 If you can successfully connect, please double check your `OPENAI_API_KEY` key and make sure there are no issues there.

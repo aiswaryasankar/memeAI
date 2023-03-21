@@ -81,7 +81,8 @@ for i, res in enumerate(query_results):
     with open(f'query-result-image-{i}.png', 'wb') as f:
         f.write(decoded_img)
 
-print("If you see descriptions and their corresponding images has been saved successfully, " 
+print("If you see two descriptions and their corresponding images files, "
+      "\"query-results-image-0.png\" and \"query-results-image-1.png\", been saved successfully, " 
       "you can succesfully query the weaviate instance!")
 # logger.info("If you see descriptions and their corresponding images has been saved successfully, " \
 #       "you can succesfully query the weaviate instance!")
