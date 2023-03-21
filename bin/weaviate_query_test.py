@@ -2,21 +2,22 @@
 
 """
 Test if Weaviate instance contains objects by querying for
-meme descriptions similar to `Happy`
+meme descriptions similar to `Sad`
 """
 
 import os
-import logging
-from logtail import LogtailHandler
+# import logging
 import base64
 
 import weaviate
-handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
-logger = logging.getLogger(__name__)
-logger.handlers = []
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)
 
+from logtail import LogtailHandler
+
+# handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
+# logger = logging.getLogger(__name__)
+# logger.handlers = []
+# logger.addHandler(handler)
+# logger.setLevel(logging.INFO)
 
 WEAVIATE_URL = os.getenv('WEAVIATE_URL')
 CLIENT_CONFIG = None
@@ -51,25 +52,36 @@ def weaviate_text_search(text):
 
     weaviate_results = CLIENT.query.get("Meme", ["description", 'image']).with_near_text(source_text).with_limit(2).do()
 
-    logger.info(weaviate_results)
+    # WARNING: ONLY UNCOMMENT IF YOU ARE RUNNING INTO ISSUES GETTING QUERY RESULTS.
+    # This WILL output the contents of two image files to your terminal window if you uncomment this.
+
+    # print(f"Weaviate results: {weaviate_results}")
+    # logger.info(weaviate_results)
+
     return weaviate_results["data"]["Get"]["Meme"]
 
-logger.info(f"Connecting to a weaviate instance at the following URL: {WEAVIATE_URL}")
+# logger.info(f"Connecting to a weaviate instance at the following URL: {WEAVIATE_URL}")
+print(f"Connecting to a Weaviate instance at the following URL: {WEAVIATE_URL}")
 
 query_results = weaviate_text_search('Sad')
 
-logger.info(query_results)
+# WARNING: ONLY UNCOMMENT IF YOU ARE RUNNING INTO ISSUES GETTING QUERY RESULTS.
+# This WILL output the contents of two image files to your terminal window if you uncomment this.
+# print(f"Query results: {query_results}")
+# logger.info(query_results)
+
+if query_results is None:
+    raise ValueError('No queries were returned. Please check your OPENAI_API_KEY.')
 
 for i, res in enumerate(query_results):
     description = res['description']
-    logger.info(f"Description: {description}")
+    print(f"Description: {description}")
+    # logger.info(f"Description: {description}")
     decoded_img = base64.b64decode(res['image'])
     with open(f'query-result-image-{i}.png', 'wb') as f:
         f.write(decoded_img)
 
-logger.info("If you see descriptions and their corresponding images has been saved successfully, " \
+print("If you see descriptions and their corresponding images has been saved successfully, " 
       "you can succesfully query the weaviate instance!")
-
-
-
-
+# logger.info("If you see descriptions and their corresponding images has been saved successfully, " \
+#       "you can succesfully query the weaviate instance!")
