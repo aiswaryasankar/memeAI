@@ -1,4 +1,3 @@
-## "d:/Data Science and ML/My Projects/memeAI/env/python.exe" -m streamlit run ./webapp/main_page.py
 import streamlit as st
 st.set_page_config(
     page_title="Text-to-meme | MemeAI",
@@ -33,4 +32,4 @@ with col1:
 with col2:
     load_button('./webapp/styles/buton.css')
     if st.button('Themed memes'):
-        switch_page("temp")
+        switch_page("theme")
