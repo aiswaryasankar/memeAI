@@ -20,8 +20,8 @@
                 },
                 {
                     "dataType": ["text"],
-                    "description": "Filename of meme",
-                    "name": "filename",
+                    "description": "URL of meme template",
+                    "name": "template_url",
                     "moduleConfig": {
                         "text2vec-openai": {
                             "skip": true
@@ -30,7 +30,7 @@
                 },
                 {
                     "dataType": ["text"],
-                    "description": "Name of meme",
+                    "description": "Name of Meme",
                     "name": "name",
                     "moduleConfig": {
                         "text2vec-openai": {
