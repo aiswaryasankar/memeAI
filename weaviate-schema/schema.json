@@ -24,7 +24,8 @@
                     "name": "template_url",
                     "moduleConfig": {
                         "text2vec-openai": {
-                            "skip": true
+                            "skip": true,
+                            "vectorizePropertyName": false
                         }
                     }
                 },
@@ -34,7 +35,8 @@
                     "name": "name",
                     "moduleConfig": {
                         "text2vec-openai": {
-                            "skip": true
+                            "skip": true,
+                            "vectorizePropertyName": false
                         }
                     }
                 },
@@ -44,7 +46,8 @@
                     "name": "image",
                     "moduleConfig": {
                         "text2vec-openai": {
-                            "skip": true
+                            "skip": true,
+                            "vectorizePropertyName": false
                         }
                     }
                 }
