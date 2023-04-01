@@ -2,7 +2,7 @@ from django.http.response import JsonResponse
 from rest_framework.response import Response
 import logging
 from .serializer import *
-from logtail import LogtailHandler
+from logtail.handler import LogtailHandler
 from datetime import datetime
 import openai
 import weaviate
@@ -12,11 +12,11 @@ from PIL import Image, ImageDraw, ImageFont
 
 
 
-handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
-logger = logging.getLogger(__name__)
-logger.handlers = []
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)
+# handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
+# logger = logging.getLogger(__name__)
+# logger.handlers = []
+# logger.addHandler(handler)
+# logger.setLevel(logging.INFO)
 
 WEAVIATE_URL = os.getenv('WEAVIATE_URL')
 CLIENT_CONFIG = None
@@ -69,8 +69,8 @@ def generate_text_for_meme(generateTextForMemeRequest):
       presence_penalty=0,
     )
 
-    logger.info("Meme input text: " + str(memeText))
-    logger.info("Meme text: " + str(memeText.choices[0].text))
+    # logger.info("Meme input text: " + str(memeText))
+    # logger.info("Meme text: " + str(memeText.choices[0].text))
 
     # Return the meme URL and description
     return GenerateTextForMemeResponse(
