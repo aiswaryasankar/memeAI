@@ -80,6 +80,7 @@ def match_text_to_meme(matchTextToMemeRequest):
     )
 
     # logger.info("Meme query text: " + str(memeQueryText))
+    print("Meme query text: " + str(memeQueryText))
 
     # Use that text to match with memes
     source_text = { "concepts": memeQueryText.choices[0].text }
