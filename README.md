@@ -71,3 +71,11 @@ The application can be run using the following command: `python manage.py runser
 This is expected as we currently do not have a default page.
 Once we have a default page, this will disappear.
 Thanks!
+
+## Running the Web App
+
+pip install streamlit and streamlit-extras
+
+The web app can be started using the following command: `python -m streamlit run ./webapp/main_page.py`
+
+The web page will run at Local URL: http://localhost:80.
