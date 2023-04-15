@@ -80,5 +80,15 @@ class MatchTextToMemeResponse:
 #
 ###
 
+@dataclass
+class MemeGenerationRequest:
+     InputText: str
+
+@dataclass_json
+@dataclass
+class MemeGenerationResponse:
+     Memes: List[str]
+     Error: Exception
+
 
 
