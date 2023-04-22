@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from memeGeneration import views as memeGenerationView
 from memeMatching import views as memeMatchingView
+from appBackend import views as appBackendView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +30,6 @@ urlpatterns = [
     path('generateTextForMeme/', memeGenerationView.generate_text_for_meme_view),
     path('generateMeme/', memeGenerationView.generate_meme_image_view),
 
+    # AppBackend endpoints
+    path('memeGeneration/', appBackendView.meme_generation_view),
 ]
