@@ -31,5 +31,5 @@ urlpatterns = [
     path('generateMeme/', memeGenerationView.generate_meme_image_view),
 
     # AppBackend endpoints
-    path('memeGeneration/', appBackendView.)
+    path('memeGeneration/', appBackendView.meme_generation_view),
 ]
