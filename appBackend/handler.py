@@ -58,6 +58,12 @@ def meme_generation(generateTextForMemeRequest):
     )
   )
 
+
+  template_url = 'https://hlhmmkpugruknefsttlr.supabase.co/storage/v1/object/public/meme-templates-public/Happy--Shock.png'
+  r = requests.get(template_url, allow_redirects=True)
+  with open(f'testing.png', 'wb') as f:
+      f.write(r.content)
+
   return createMemeImageResponse
 
 
