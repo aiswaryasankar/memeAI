@@ -75,7 +75,7 @@ def match_text_to_meme(matchTextToMemeRequest):
       n=1,
       stop=None,
       frequency_penalty=0,
-      best_of=1,
+      best_of=10,
       presence_penalty=0,
     )
 
