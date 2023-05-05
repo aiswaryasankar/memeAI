@@ -11,6 +11,8 @@ from idl import *
 from PIL import Image, ImageDraw, ImageFont
 
 
+import base64
+import io
 
 # handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
 # logger = logging.getLogger(__name__)
@@ -44,6 +46,18 @@ CLIENT = weaviate.Client(WEAVIATE_URL,
                          auth_client_secret=CLIENT_CONFIG,
                          additional_headers={"X-OpenAI-Api-Key": OPENAI_API_KEY})
 
+def construt_pil_img(contents):
+    """
+    Helper function for handling image
+    """
+
+    # Open image from assets folder
+    image_data = io.BytesIO(base64.decodebytes(contents.encode('ascii')))
+    image = Image.open(image_data)
+    if image.mode != "RGB":
+        image = image.convert(mode="RGB")
+
+    return image
 
 
 def generate_text_for_meme(generateTextForMemeRequest):
@@ -95,8 +109,15 @@ def generate_meme_image(generateMemeImageRequest):
 
   try:
     # Load the image
+
+    print(f'Generating meme image for {generateMemeImageRequest.MemeText}')
     curPath = os.getcwd()
-    image = Image.open(curPath + '/memeGeneration/query-result-image-0.png')
+    image = construt_pil_img(generateMemeImageRequest.MemeImage)
+
+    # image = Image.open(decoded_img)
+    # image = Image.open(curPath + '/memeGeneration/query-result-image-0.png')
+
+    print("Read in image. Positioning image")
 
     # Create a drawing context and set the font
     draw = ImageDraw.Draw(image)
@@ -104,6 +125,8 @@ def generate_meme_image(generateMemeImageRequest):
 
     # Define the text to draw and its position
     text = generateMemeImageRequest.MemeText
+    print(f"Image (width,height): {image.width},{image.height}")
+
     position = (50, 50)
 
     # Draw the text on the image
