@@ -51,7 +51,6 @@ def construt_pil_img(contents):
     Helper function for handling image
     """
 
-    # Open image from assets folder
     image_data = io.BytesIO(base64.decodebytes(contents.encode('ascii')))
     image = Image.open(image_data)
     if image.mode != "RGB":
