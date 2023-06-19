@@ -2,7 +2,7 @@ from django.http.response import JsonResponse
 from rest_framework.response import Response
 import logging
 from .serializer import *
-from logtail import LogtailHandler
+from logtail.handler import LogtailHandler
 from datetime import datetime
 import openai
 import weaviate
@@ -14,11 +14,11 @@ from memeMatching import handler as memeMatchingHandler
 import requests
 import base64
 
-handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
-logger = logging.getLogger(__name__)
-logger.handlers = []
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)
+# handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
+# logger = logging.getLogger(__name__)
+# logger.handlers = []
+# logger.addHandler(handler)
+# logger.setLevel(logging.INFO)
 
 def meme_generation(generateTextForMemeRequest):
   """
@@ -53,7 +53,7 @@ def meme_generation(generateTextForMemeRequest):
   # Create meme image
   createMemeImageResponse = memeGenerationHandler.generate_meme_image(
     GenerateMemeImageRequest(
-      MemeImage= matchTextToMemeResponse.Memes[0],
+      MemeImage=matchTextToMemeResponse.Memes[0]['image'],
       MemeText= generateTextForMemeResponse.OutputText,
     )
   )

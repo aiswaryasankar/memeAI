@@ -2,7 +2,7 @@ from django.http.response import JsonResponse
 from rest_framework.response import Response
 import logging
 from .serializer import *
-from logtail import LogtailHandler
+from logtail.handler import LogtailHandler
 from datetime import datetime
 import openai
 import weaviate
@@ -12,11 +12,11 @@ from idl import *
 import requests
 import base64
 
-handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
-logger = logging.getLogger(__name__)
-logger.handlers = []
-logger.addHandler(handler)
-logger.setLevel(logging.INFO)
+# handler = LogtailHandler(source_token="tvoi6AuG8ieLux2PbHqdJSVR")
+# logger = logging.getLogger(__name__)
+# logger.handlers = []
+# logger.addHandler(handler)
+# logger.setLevel(logging.INFO)
 
 WEAVIATE_URL = os.getenv('WEAVIATE_URL')
 CLIENT_CONFIG = None
@@ -55,8 +55,8 @@ def hello_world(helloWorldRequest):
   """
     Demo function for testing purposes
   """
-  logger.info(helloWorldRequest)
-  logger.info(helloWorldRequest.name)
+  # logger.info(helloWorldRequest)
+  # logger.info(helloWorldRequest.name)
 
 
 def match_text_to_meme(matchTextToMemeRequest):
@@ -72,21 +72,23 @@ def match_text_to_meme(matchTextToMemeRequest):
       prompt=emotionalDescription,
       temperature=0.7,
       max_tokens=500,
-      n=10,
+      n=1,
       stop=None,
       frequency_penalty=0,
       best_of=10,
       presence_penalty=0,
     )
 
-    logger.info("Meme query text: " + str(memeQueryText))
+    # logger.info("Meme query text: " + str(memeQueryText))
+    print("Meme query text: " + str(memeQueryText))
 
     # Use that text to match with memes
     source_text = { "concepts": memeQueryText.choices[0].text }
 
-    weaviate_results = CLIENT.query.get("Meme", ["description", 'image']).with_near_text(source_text).with_limit(10).do()
+    weaviate_results = CLIENT.query.get("Meme", [
+       'description', 'image', 'template_url']).with_near_text(source_text).with_limit(10).do()
 
-    logger.info("Weaviate results: " + str(weaviate_results))
+    # logger.info("Weaviate results: " + str(weaviate_results))
 
     # Return the meme URL and description
     return MatchTextToMemeResponse(
@@ -116,14 +118,14 @@ def index_memes_weaviate(indexMemesWeaviateRequest):
     b64_encoded_image = base64.b64encode(response.content).decode('utf-8')
 
     data_object = {
-      'filename': url,
-      'filepath': url,
+      'name': description.replace(' ', '-'),
+      'template_url': url,
       'description': description,
       'image': b64_encoded_image
       }
 
-    logger.info(f"Uploading meme found at {url} " \
-                f"with the following description: {description}")
+    # logger.info(f"Uploading meme found at {url} " \
+    #             f"with the following description: {description}")
 
     # Write image data to file to check if images are encoded correctly.
     # with open(f'image-uploaded-to-weaviate-{i}.png', 'wb') as f:
@@ -131,10 +133,10 @@ def index_memes_weaviate(indexMemesWeaviateRequest):
 
     try:
       CLIENT.batch.add_data_object(data_object, "Meme")
-      logger.info('Successfully added Meme object to batch!')
+      print(f'Successfully added Meme object {description} to batch!')
     except Exception as e:
        return IndexMemesWeaviateResponse(Error=str(e))
 
-  logger.info('Sending Meme objects to Weaviate')
+  # logger.info('Sending Meme objects to Weaviate')
   CLIENT.batch.flush()
   return IndexMemesWeaviateResponse(Error=None)
