@@ -15,9 +15,9 @@ If you are able to get this running on an older version of Python, or the Meme G
 on a later version, please open an issue and we will look into it.
 
 You can set up your Python envrionment using any method (e.g., Poetry, pipenv, conda, etc.), but please
-make sure you have **all** packages from `requirements.txt` installed. 
+make sure you have **all** packages from `requirements.txt` installed.
 
-**NOTE**: We have only tested `virtualenv` and `pipenv`. 
+**NOTE**: We have only tested `virtualenv` and `pipenv`.
 If you have success with other methods, please let us know and we can add instructions here!
 
 ### Setting up Envrionment using virtualenv
@@ -46,11 +46,11 @@ Prior to running the Meme Generator, you should test whether you can connect to 
 There are two scripts that can be used to do this: `bin/weaviate_test.py` and `bin/weaviate_query_test.py`.
 
 ### Test Connection
-If you would like to test whether you can connect to the Weaviate instance, you can run `bin/weaviate_test.py`. 
+If you would like to test whether you can connect to the Weaviate instance, you can run `bin/weaviate_test.py`.
 This script should print out the schema on Weaviate upon successfully connecting to the Weaviate instance.
 
 ### Test Querying
-If you would like to test whether you can query the Weaviate instance, you can run `bin/weaviate_query_test.py`. 
+If you would like to test whether you can query the Weaviate instance, you can run `bin/weaviate_query_test.py`.
 
 The script should return two descriptions and save two image files:
 1. "A frustrated person who is very disappointed at the outcome" -  `query-results-image-0.png`
@@ -60,14 +60,19 @@ You can double check the contents of the images by checking their "expected" cou
 1. `query-results-image-0.png` should be `expected-query-result-image-0.png`
 2. `query-results-image-1.png` should be `expected-query-result-image-1.png`
 
-If you run into any issues here, please first check if you can connect to the Weaviate instance. 
+If you run into any issues here, please first check if you can connect to the Weaviate instance.
 If you can successfully connect, please double check your `OPENAI_API_KEY` key and make sure there are no issues there.
 
 ## Running the App
 
 The application can be run using the following command: `python manage.py runserver`
 
-**NOTE**: Currently, when you connect to `http://127.0.0.1:8000/`, you should see a `Page not found` error. 
+**NOTE**: Currently, when you connect to `http://127.0.0.1:8000/`, you should see a `Page not found` error.
 This is expected as we currently do not have a default page.
 Once we have a default page, this will disappear.
 Thanks!
+
+## Future Work
+In the future we will additionally be putting up a front end through Pynecone.
+
+
