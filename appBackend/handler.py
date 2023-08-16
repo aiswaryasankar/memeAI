@@ -2,7 +2,7 @@ from django.http.response import JsonResponse
 from rest_framework.response import Response
 import logging
 from .serializer import *
-from logtail.handler import LogtailHandler
+from logtail import LogtailHandler
 from datetime import datetime
 import openai
 import weaviate
