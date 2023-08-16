@@ -11,7 +11,6 @@ Welcome to MemeAI's documentation!
    :caption: Contents:
 
 
-
 Indices and tables
 ==================
 

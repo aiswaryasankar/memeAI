@@ -14,7 +14,13 @@ release = '8/16/23'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.viewcode',
+    'sphinx.ext.duration',
+    'sphinx.ext.doctest',
+    'sphinx.ext.autosummary'
+]
 
 templates_path = ['_templates']
 exclude_patterns = []
