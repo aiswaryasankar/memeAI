@@ -75,4 +75,11 @@ Thanks!
 ## Future Work
 In the future we will additionally be putting up a front end through Pynecone.
 
+## Running the Web App
+
+pip install streamlit and streamlit-extras
+
+The web app can be started using the following command: `python -m streamlit run ./webapp/main_page.py`
+
+The web page will run at Local URL: http://localhost:80.
 
