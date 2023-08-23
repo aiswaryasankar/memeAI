@@ -4,7 +4,6 @@ import json
 
 # from marshmallow import EXCLUDE, fields, pre_dump, Schema, validate
 import requests
-import desert
 from enum import Enum
 from typing import List, Optional
 import time
