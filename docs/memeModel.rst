@@ -11,6 +11,7 @@ Subpackages
    memeModel.memeGeneration
    memeModel.memeMatching
    memeModel.root
+   memeModel.webapp
 
 Submodules
 ----------
