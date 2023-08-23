@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.request import Request
 from .handler import *
-from idl import *
+from memeModel import idl
 
 """
   This file will handle the actual external facing API for the MemeMatching service.
