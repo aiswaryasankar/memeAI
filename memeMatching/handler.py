@@ -7,7 +7,7 @@ from datetime import datetime
 import openai
 import weaviate
 import os
-from idl import *
+from memeModel import idl
 
 import requests
 import base64

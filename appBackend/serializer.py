@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from idl import *
+from memeModel import idl 
 from rest_framework_dataclasses.serializers import DataclassSerializer
 from rest_framework.parsers import JSONParser
 

@@ -7,7 +7,7 @@ from datetime import datetime
 import openai
 import weaviate
 import os
-from idl import *
+from memeModel import idl
 from memeGeneration import handler as memeGenerationHandler
 from memeMatching import handler as memeMatchingHandler
 
