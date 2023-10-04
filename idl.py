@@ -72,6 +72,16 @@ class MatchTextToMemeResponse:
 	Memes: List[str]
 	Error: Exception
 
+@dataclass
+class GenerateMultipleMemeImagesRequest:
+	NumVersions: int
+
+@dataclass_json
+@dataclass
+class GenerateMultipleMemeImagesResponse:
+	Memes: List[str]
+	Error: Exception
+
 
 ###
 #
