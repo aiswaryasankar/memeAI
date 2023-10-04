@@ -25,6 +25,7 @@ urlpatterns = [
     # MemeMatching endpoints
     path('matchTextToMeme/', memeMatchingView.match_text_to_meme_view),
     path('indexMemes/', memeMatchingView.index_memes_weaviate_view),
+    path('generateMultipleMemeImages/', memeMatchingView.generate_multiple_meme_image_view),
 
     # MemeGeneration endpoints
     path('generateTextForMeme/', memeGenerationView.generate_text_for_meme_view),
