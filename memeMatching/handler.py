@@ -30,7 +30,7 @@ if WEAVIATE_URL:
             "This is needed to log into the Weaviate instance.")
     CLIENT_CONFIG = weaviate.AuthBearerToken(
         access_token=access_token,
-        expires_in=300 # this is in seconds, by default 60s
+        expires_in=18000 # this is in seconds, by default 60s
         )
 else:
     WEAVIATE_URL = 'http://localhost:8080'
